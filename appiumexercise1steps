@@ -1,0 +1,60 @@
+1. Requirements
+  a) Appium.app
+  b) Terminal
+  c) Xcode  
+  d) safari develop simulator inspector
+  e) bundler
+
+2. Steps
+  a)Terminal create directory
+   mkdir practice1
+   cd practice1
+   mkdir ios_safari
+   cd ios_safari
+  b)setup the gemfiles
+   appium_lib
+   bundle init
+   open -a TextEdit Gemfile 
+   cat Gemfile
+   bundle install
+ 3.code
+   touch simple.rb
+   open -a TextEdit simple.rb
+
+   ----------------------
+   require 'rubygems'
+   require 'appium_lib'
+
+
+   desired_caps = {
+  caps: {
+  platformName: 'iOS',
+  platformVersion: '9.3',
+  deviceName: 'Iphone 5s',
+  browserName:  'Safari',
+	}
+  }
+
+ #Standard Selenium driver without any Appium methods.
+
+@appium_driver = Appium::Driver.new(desired_caps)  
+@selenium_driver = @appium_driver.start_driver
+
+# Now promote appium methods to class instance methods.  More information at http://www.rubydoc.#info/github/appium/ruby_lib/Appium.promote_appium_methods
+
+Appium.promote_appium_methods Object
+
+@selenium_driver.get("http://www.google.com/")
+
+  c) Identify elements
+  Open the simulator and safari >develop> simulator
+  # id="tsbb" botón
+  # id='lst-ib' búsqueda
+sleep(5)
+element = find_element(:id, 'lst-ib')
+element.click
+element.send_keys 'Georgina Villafuerte'
+element = find_element(:id, 'tsbb')  
+element.click 
+driver_quit  
+
