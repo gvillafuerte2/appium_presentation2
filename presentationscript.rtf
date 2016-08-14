@@ -1,96 +1,85 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
 {\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 HelveticaNeue;\f2\fnil\fcharset0 HelveticaNeue-Medium;
-\f3\fnil\fcharset0 Menlo-Regular;}
-{\colortbl;\red255\green255\blue255;\red38\green38\blue38;\red255\green255\blue255;\red53\green118\blue190;
-\red184\green14\blue61;\red247\green238\blue241;}
-{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
-{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
-\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\f3\froman\fcharset0 Times-Roman;}
+{\colortbl;\red255\green255\blue255;\red38\green38\blue38;\red0\green0\blue233;}
+\margl1440\margr1440\vieww19760\viewh8400\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
 \f0\fs72 \cf0 Philosophy
 \fs24 \
 
-\b 1.No recompiling changing app (native)
+\b 1.No recompiling changing app (native)\
+
 \b0 \
 \pard\pardeftab720\sl400\sa200\partightenfactor0
 
-\f1\fs28 \cf2 \cb3 \expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 We meet requirement #1 by using vendor-provided automation frameworks under the hood. That way, we don't need to compile in any Appium-specific or third-party code or frameworks to your app. This means you're testing the same app you're shipping. The vendor-provided frameworks we use are:\
-\pard\tx220\tx720\pardeftab720\li720\fi-720\sl400\partightenfactor0
-\ls1\ilvl0\cf2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 iOS: Apple's {\field{\*\fldinst{HYPERLINK "https://developer.apple.com/library/ios/documentation/DeveloperTools/Reference/UIAutomationRef/"}}{\fldrslt \cf4 \strokec4 UIAutomation}}\cb1 \
-\ls1\ilvl0\cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 Android 4.2+: Google's {\field{\*\fldinst{HYPERLINK "http://developer.android.com/tools/help/uiautomator/index.html"}}{\fldrslt \cf4 \strokec4 UiAutomator}}\cb1 \
-\ls1\ilvl0\cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 Android 2.3+: Google's {\field{\*\fldinst{HYPERLINK "http://developer.android.com/reference/android/app/Instrumentation.html"}}{\fldrslt \cf4 \strokec4 Instrumentation}}. (Instrumentation support is provided by bundling a separate project, {\field{\*\fldinst{HYPERLINK "http://selendroid.io/"}}{\fldrslt \cf4 \strokec4 Selendroid}})\cb1 \
+\f1\fs28 \cf2 \expnd0\expndtw0\kerning0
+APPIUM hace uso de los frameworks de automatizaci\'f3n propios de cada "vendor". De esta forma no es necesario recompilar la app para integrar ning\'fan script de appium o de cualquier framework de prueba para probar la aplicaci\'f3n.\
+Esto significa que se prueba la aplicaci\'f3n que esta corriendo en el simulador o en el dispositivo. No es necesario tener el c\'f3digo fuente de la aplicaci\'f3n \
+los frameworks de automatizaci\'f3n que utiliza son:UIAUTOMATION para iOS y UIAutomator o Instrumentation para android\
+(librerias de cada vendor para escribir tests sobre los elementos de la interfaz de usuario que expone cada applicacion)
+\f0\fs24 \cf0 \kerning1\expnd0\expndtw0 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
-
-\f0\fs24 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
-\
+\cf0 \
 \
 \
 
-\b 2. Test framework agnostic:
+\b 2. Test framework agnostic:\
+\
+Appium encapsula las librer\'edas de cada vendor en un API, la API web driver,\
+ (api: application programming interface).Esta API especifica un protocolo cliente/servidor conocido como JSON Wire protocol
+\i  (usa json sobre http)
+\i0  Debido a esta arquitectura cliente servidor, un cliente en cualquier lenguaje puede ser utilizado para enviar http recuestes al server. Existen ya opciones de especificas de clientes para appiun escritas en varios lenguajes de programaci\'f3n. esto significa que tambi\'e9n se puede utilizar cualquier test framework las librer\'edas del cliente son simple http clientes en otras palabras appium y webdriver clients no son t\'e9cnicamente test frameworks sino que son librer\'edas de automatizaci\'f3n
 \b0 \
 \pard\pardeftab720\sl400\partightenfactor0
 
-\f1\fs28 \cf2 \cb3 \expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2   wrapping the vendor-provided frameworks in one API, the {\field{\*\fldinst{HYPERLINK "http://docs.seleniumhq.org/projects/webdriver/"}}{\fldrslt \cf4 \strokec4 WebDriver}} API. WebDriver (aka "Selenium WebDriver") specifies a client-server protocol (known as the {\field{\*\fldinst{HYPERLINK "https://w3c.github.io/webdriver/webdriver-spec.html"}}{\fldrslt \cf4 \strokec4 JSON Wire Protocol}}). Given this client-server architecture, a client written in any language can be used to send the appropriate HTTP requests to the server. There are already {\field{\*\fldinst{HYPERLINK "http://appium.io/downloads"}}{\fldrslt \cf4 \strokec4 clients written in every popular programming language}}. This also means that you're free to use whatever test runner and test framework you want; the client libraries are simply HTTP clients and can be mixed into your code any way you please. In other words, Appium & WebDriver clients are not technically "test frameworks" -- they are "automation libraries". You can manage your test environment any way you like!
-\f0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\f1\fs28 \cf2 \expnd0\expndtw0\kerning0
+\
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
-\cf0 Opensource\
-\
-\
 
-\b 3. Not reinvent the wheel
-\b0 \
+\f0\b\fs24 \cf0 \kerning1\expnd0\expndtw0 3. Not reinvent the wheel\
+web driver es el standard the facto de automatizacion para web-browsers. y es un w3c working draft (
+\i\b0\fs28 \cf2 \expnd0\expndtw0\kerning0
+es un consorcio international para documentar y definer protocolos due aseguren el crecimiento de la red 
+\i0 ).\
+Porque hacer algo totalmente diferente para mobile? En lugar de eso las librer\'edas de appium han extendido el protocolo agregando m\'e9todos a la api para automatizaci\'f3n mobil
+\fs24 \cf0 \kerning1\expnd0\expndtw0 \
 \pard\pardeftab720\sl400\partightenfactor0
 
-\f1\fs28 \cf2 \cb3 \expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2  in the same way: WebDriver has become the de facto standard for automating web browsers, and is a {\field{\*\fldinst{HYPERLINK "https://dvcs.w3.org/hg/webdriver/raw-file/tip/webdriver-spec.html"}}{\fldrslt \cf4 \strokec4 W3C Working Draft}}. Why do something totally different for mobile? Instead we have {\field{\*\fldinst{HYPERLINK "http://appium.io/slate/en/master/#spec-draft.md"}}{\fldrslt \cf4 \strokec4 extended the protocol}} with extra API methods useful for mobile automation.
-\f0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\f1\fs28 \cf2 \expnd0\expndtw0\kerning0
 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\b APPIUM CONCEPTS\
+\f0\fs24 \cf0 \kerning1\expnd0\expndtw0 \
+\
+\pard\pardeftab720\sl400\partightenfactor0
+\cf0 \
+\
 \pard\pardeftab720\sl520\sa200\partightenfactor0
 
-\f2\b0\fs48 \cf2 \cb3 \expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 Appium Concepts\
+\f2\fs48 \cf2 \expnd0\expndtw0\kerning0
+Appium Concepts\
 \pard\pardeftab720\sl400\sa200\partightenfactor0
 
 \f1\b\fs28 \cf2 Client/Server Architecture
-\b0 \cb1 \uc0\u8232 \cb3 Appium is at its heart a webserver that exposes a REST API. It receives connections from a client, listens for commands, executes those commands on a mobile device, and responds with an HTTP response representing the result of the command execution. The fact that we have a client/server architecture opens up a lot of possibilities: we can write our test code in any language that has a http client API, but it is easier to use one of the {\field{\*\fldinst{HYPERLINK "http://appium.io/downloads"}}{\fldrslt \cf4 \strokec4 Appium client libraries}}. We can put the server on a different machine than our tests are running on. We can write test code and rely on a cloud service like {\field{\*\fldinst{HYPERLINK "https://saucelabs.com/mobile"}}{\fldrslt \cf4 \strokec4 Sauce Labs}} to receive and interpret the commands.\
+\b0 \uc0\u8232 Appium es basicament un webserver que espone una rest api\
+ES un web server que expone una rest api (
+\f3\fs24 \cf0 Representational state transfer ({\field{\*\fldinst{HYPERLINK "http://searchsoa.techtarget.com/definition/REST"}}{\fldrslt \cf3 \ul \ulc3 REST}}), cuando un web service hace uso de la arquitectura rest se le llama restfull-api o rest api)
+\f1\fs28 \cf2 )\
+Recibe conexiones de un cliente, ejecuta esos comandos en un dispositivo mobil y responde con un http response que es la respuesta de la ejecuci\'f3n del comando.\
+El hecho de ser una arquitectura cliente servidor abre las posibilidades a escribir las pruebas en cualquier lenguaje que tengo un cliente http. Podemos poner el server en una maquina distinta a donde est\'e1n las pruebas, podemos escribir el c\'f3digo y subirlo a un servicio en la nube como sauce labs\
+ \
 
-\b Session
-\b0 \cb1 \uc0\u8232 \cb3 Automation is always performed in the context of a session. Clients initiate a session with a server in ways specific to each library, but they all end up sending a 
-\f3\fs26 \cf5 \cb6 \strokec5 POST /session
-\f1\fs28 \cf2 \cb3 \strokec2  request to the server, with a JSON object called the 'desired capabilities' object. At this point the server will start up the automation session and respond with a session ID which is used for sending further commands.\
+\b Session\
+La automatizacion se ejecuta siempre  en el contexto de una sesion. Los clientes debe iniciar la session al server en una forma espec\'edfica en cada librer\'eda, pero siempre es un request de tipo "post session" con un objecto  json que se llama "desired capabilities".. EN see momento el server iniciar\'e1 la session y responderas con un session id due es usado en adelante para envier otros comandos
+\b0 \uc0\u8232 \
+\
 
-\b Desired Capabilities
-\b0 \cb1 \uc0\u8232 \cb3 Desired capabilities are a set of keys and values (i.e., a map or hash) sent to the Appium server to tell the server what kind of automation session we're interested in starting up. There are also various capabilities which can modify the behavior of the server during automation. For example, we might set the 
-\f3\fs26 \cf5 \cb6 \strokec5 platformName
-\f1\fs28 \cf2 \cb3 \strokec2  capability to 
-\f3\fs26 \cf5 \cb6 \strokec5 iOS
-\f1\fs28 \cf2 \cb3 \strokec2  to tell Appium that we want an iOS session, rather than an Android one. Or we might set the 
-\f3\fs26 \cf5 \cb6 \strokec5 safariAllowPopups
-\f1\fs28 \cf2 \cb3 \strokec2  capability to 
-\f3\fs26 \cf5 \cb6 \strokec5 true
-\f1\fs28 \cf2 \cb3 \strokec2  in order to ensure that, during a Safari automation session, we're allowed to use JavaScript to open up new windows. See the {\field{\*\fldinst{HYPERLINK "http://appium.io/slate/en/master/#caps.md"}}{\fldrslt \cf4 \strokec4 capabilities doc}} for the complete list of capabilities available for Appium.\
-
-\b Appium Server
-\b0 \cb1 \uc0\u8232 \cb3 Appium is a server written in Node.js. It can be built and installed {\field{\*\fldinst{HYPERLINK "http://appium.io/slate/en/master/#appium-from-source.md"}}{\fldrslt \cf4 \strokec4 from source}} or installed directly from NPM: 
-\f3\fs26 \cf5 \cb6 \strokec5 $ npm install -g appium $ appium
-\f1\fs28 \cf2 \cb3 \strokec2 \
+\b Desired Capabilities\
+Es un conjunto de keys y valores recibido for el server que especifica el tipo de session de automatizacion que estamos interesados en iniciar. Existen muchas capabilities que pueden modificar el comportamiento del server durante la automatizacion por ejemplo podemos setear platformName a IOS para decir a apium que quermos una sesison ios en lugar de android. O podemos especificar safariAllowpopups a true para asgurarnos que durante la sesion de safari estamos autorizando que js abra nuevas ventanas. 
+\b0 \uc0\u8232 existe un documento capabilities doc que define todos los posibles valores de cada key disponible\
+\
 
 \b Appium Clients
-\b0 \cb1 \uc0\u8232 \cb3 There are client libraries (in Java, Ruby, Python, PHP, JavaScript, and C#) which support Appium's extensions to the WebDriver protocol. When using Appium, you want to use these client libraries instead of your regular WebDriver client. You can view the full list of libraries {\field{\*\fldinst{HYPERLINK "http://appium.io/slate/en/master/#appium-clients.md"}}{\fldrslt \cf4 \strokec4 here}}.\
-\pard\pardeftab720\sl400\sa200\partightenfactor0
-{\field{\*\fldinst{HYPERLINK "https://github.com/appium/appium-dot-app"}}{\fldrslt 
-\b \cf4 \strokec4 Appium.app}}
-\b , {\field{\*\fldinst{HYPERLINK "https://github.com/appium/appium-dot-exe"}}{\fldrslt \cf4 \strokec4 Appium.exe}}
-\b0 \cb1 \uc0\u8232 \cb3 There exist GUI wrappers around the Appium server that can be downloaded. These come bundled with everything required to run the Appium server, so you don't need to worry about Node. They also come with an Inspector, which enables you to check out the hierarchy of your app. This can come in handy when writing tests.\
-\pard\pardeftab720\sl400\partightenfactor0
-
-\f0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\b0 \uc0\u8232 estas son extensionces del protocolo de appium webdriver cuando se usa appium se recomienda el uso de estas librerias en lugar de tu cliente webdriver regular. \
 }
